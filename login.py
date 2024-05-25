@@ -24,10 +24,9 @@ def test_login(email, password, onDevice):
         driver = webdriver.Chrome()
         driver.maximize_window()
 
+    driver.get("https://dev.trustline.sa/login")
     # TC-00 Validate the login page title
     assert driver.title == "Login | Trustline"
-
-    driver.get("https://dev.trustline.sa/login")
     #  TC-09 - Validate the heading "Log in to your account" in page source
     assert "Log in to your account" in driver.page_source
     #  TC-10 - Validate the email field in page source.
@@ -63,7 +62,7 @@ def test_login(email, password, onDevice):
             )
 
         elif email == "usman.ali18feb@gmail.com" and password == "@Mani123456":
-            element = WebDriverWait(driver, 2).until(
+            element = WebDriverWait(driver, 2.5).until(
                 EC.visibility_of_element_located((By.XPATH, "//div/h2"))
             )
             expected_text = "Email or password is wrong"
