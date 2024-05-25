@@ -53,8 +53,7 @@ def test_register_expert(
     assert "herebyConfirmRead" in driver.page_source
     # TC-40 - Validate the Create button in page source
     assert driver.find_element(By.XPATH, '//button[@type="submit"][text()="Create"]')
-
-    # Scenario: Username is already used
+    
     driver.find_element(By.ID, "floatingInputFullName").send_keys(fullName)
     driver.find_element(By.ID, "floatingInputUsername").send_keys(userName)
     driver.find_element(By.ID, "email").send_keys(email)
@@ -105,13 +104,11 @@ def test_register_expert(
             and confirm_password == "@Mani112233"
             and confirm_read == "Yes"
         ):
-            # Wait for the div element containing the h2 element to be present and visible
             element = WebDriverWait(driver, 3).until(
                 EC.visibility_of_element_located((By.XPATH, "//div/h2"))
             )
-            
-            # Assert the text of the h2 element
             expected_text = "This email is registered"
+            # TC-42 - Validate prompt for email is already registered
             assert (
                 element.text == expected_text
             ), f"Expected text '{expected_text}' not found. Found text: '{element.text}'"
@@ -128,19 +125,14 @@ def test_register_expert(
             and confirm_password == "@Mani112233"
             and confirm_read == "Yes"
         ):
-
-            # Wait for the div element containing the h2 element to be present and visible
             element = WebDriverWait(driver, 2).until(
                 EC.visibility_of_element_located((By.XPATH, "//div/h2"))
             )
-
-            # Assert the text of the h2 element
+            # TC-43 - Validate prompt for usrename is already registered
             expected_text = "This username is registered"
             assert (
                 element.text == expected_text
             ), f"Expected text '{expected_text}' not found. Found text: '{element.text}'"
-            # Attempt to find the account creation confirmation
-
             print(
                 "Test case for 'This username is already registered' is PASSED for expert register on "
                 + onDevice
@@ -154,8 +146,6 @@ def test_register_expert(
             and confirm_password == "@Mani123456"
             and confirm_read == "Yes"
         ):
-
-            # Wait for the p element with the class 'validation_message undefined' to be present and visible
             element_p = WebDriverWait(driver, 0.01).until(
                 EC.visibility_of_element_located(
                     (
@@ -164,9 +154,8 @@ def test_register_expert(
                     )
                 )
             )
-
-            # Assert the text of the p element
             expected_text_p = "Password & confirm password are not match"
+            # TC-44 - Validate the error message on password not matched with confirm password
             assert (
                 element_p.text == expected_text_p
             ), f"Expected text '{expected_text_p}' not found. Found text: '{element_p.text}'"
@@ -184,8 +173,6 @@ def test_register_expert(
             and confirm_password == "@Mani"
             and confirm_read == "Yes"
         ):
-
-            # Wait for the p element with the class 'validation_message undefined' to be present and visible
             element_p = WebDriverWait(driver, 0.01).until(
                 EC.visibility_of_element_located(
                     (
@@ -194,9 +181,8 @@ def test_register_expert(
                     )
                 )
             )
-
-            # Assert the text of the p element
             expected_text_p = "Password must at least contain 8 characters"
+            # TC-45 - Validate the error message on invalid password
             assert (
                 element_p.text == expected_text_p
             ), f"Expected text '{expected_text_p}' not found. Found text: '{element_p.text}'"
@@ -212,19 +198,16 @@ def test_register_expert(
             and confirm_password == "@Mani112233"
             and confirm_read == "Yes"
         ):
-
-            # Wait for the p element with the class 'validation_message undefined' to be present and visible
             element_p = WebDriverWait(driver, 0.01).until(
                 EC.visibility_of_element_located(
                     (
                         By.XPATH,
                         "//p[@class='validation_message undefined' and @role='alert']",
-                    )
+                    )   
                 )
             )
-
-            # Assert the text of the p element
             expected_text_p = "Username is not valid"
+            # TC-46 - Validate the error message on invalid username
             assert (
                 element_p.text == expected_text_p
             ), f"Expected text '{expected_text_p}' not found. Found text: '{element_p.text}'"
@@ -241,8 +224,6 @@ def test_register_expert(
             and confirm_password == "@Mani112233"
             and confirm_read == "Yes"
         ):
-
-            # Wait for the p element with the class 'validation_message undefined' to be present and visible
             element_p = WebDriverWait(driver, 0.01).until(
                 EC.visibility_of_element_located(
                     (
@@ -252,8 +233,8 @@ def test_register_expert(
                 )
             )
 
-            # Assert the text of the p element
             expected_text_p = "This field is required"
+            # TC-47 - Validate the error message on empty full name
             assert (
                 element_p.text == expected_text_p
             ), f"Expected text '{expected_text_p}' not found. Found text: '{element_p.text}'"
@@ -270,8 +251,6 @@ def test_register_expert(
             and confirm_password == "@Mani112233"
             and confirm_read == "Yes"
         ):
-
-            # Wait for the p element with the class 'validation_message undefined' to be present and visible
             element_p = WebDriverWait(driver, 0.01).until(
                 EC.visibility_of_element_located(
                     (
@@ -281,8 +260,8 @@ def test_register_expert(
                 )
             )
 
-            # Assert the text of the p element
             expected_text_p = "This field is required"
+            # TC-48 - Validate the error message on empty email
             assert (
                 element_p.text == expected_text_p
             ), f"Expected text '{expected_text_p}' not found. Found text: '{element_p.text}'"
@@ -290,8 +269,6 @@ def test_register_expert(
                 "Test case for 'Empty full name' is PASSED for expert register on "
                 + onDevice
             )
-
-
 
         if (
             fullName == "Usman Ali"
@@ -301,8 +278,6 @@ def test_register_expert(
             and confirm_password == "@Mani"
             and confirm_read == ""
         ):
-
-            # Wait for the p element with the class 'validation_message undefined' to be present and visible
             element_p = WebDriverWait(driver, 0.01).until(
                 EC.visibility_of_element_located(
                     (
@@ -311,9 +286,8 @@ def test_register_expert(
                     )
                 )
             )
-
-            # Assert the text of the p element
             expected_text_p = "You should accept Terms and Conditions"
+            #  TC-49 - Validate the error message on read policy check
             assert (
                 element_p.text == expected_text_p
             ), f"Expected text '{expected_text_p}' not found. Found text: '{element_p.text}'"
@@ -331,19 +305,12 @@ def test_register_expert(
             and confirm_password == "@Mani112233"
             and confirm_read == "Yes"
         ):
-
-            # Locate the email input field
             email_input = WebDriverWait(driver, 1).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
             )
-
-            # Get the validation message from the email input field
             validation_message = email_input.get_attribute("validationMessage")
-
-            # Expected validation message
             expected_message = "A part following '@' should not contain the symbol '@'."
-
-            # Assert the validation message
+            #  TC-50 - Validate the error message on double @ on email
             assert validation_message == expected_message, (
                 f"Expected validation message '{expected_message}', but got '{validation_message}'"
             )
@@ -358,19 +325,12 @@ def test_register_expert(
             and confirm_password == "@Mani112233"
             and confirm_read == "Yes"
         ):
-
-            # Locate the email input field
             email_input = WebDriverWait(driver, 1.5).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
             )
-
-            # Get the validation message from the email input field
             validation_message = email_input.get_attribute("validationMessage")
-
-            # Expected validation message
             expected_message = "Please include an '@' in the email address. 'usman.alifeb' is missing an '@'."
-
-            # Assert the validation message
+            # TC-51 - Validate the error message on invalid email
             assert validation_message == expected_message, (
                 f"Expected validation message '{expected_message}', but got '{validation_message}'"
             )
